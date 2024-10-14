@@ -1,0 +1,965 @@
+@charset "utf-8";
+
+/*
+CSS에 대한 설명 - main.css > 메인 비주얼 배너, 흐르는 글자(마퀴), 메뉴 슬라이드, 브랜드, 미디어, 쇼핑. 컨택(푸터)
+최초작성일 : 2024.09.26
+최초작성자 : 박혜영
+
+수정일자 :
+수정파일 작성자 :
+수정 사유:
+ */
+
+
+ /* ------------------------메인 비주얼 배너 영역------------------------ */
+
+      
+  .carousel{
+      
+      height: 100vh;
+      overflow: hidden;
+      position: relative;
+      & .list{
+          width: min(1220px, 90vw);
+          margin: auto;
+          height: 100%;
+          position: relative;
+          & .item{
+              position: absolute;
+              inset: 0;
+              & figure{
+                  position: absolute;
+                  width: 70%;
+                  top: 50%;
+                  transform: translateY(-50%);
+                  & img{
+                      width: 100%;
+                      transform: rotate(-30deg);
+                  }
+                  & .steak{
+                    position: relative;
+                    bottom: 40px;
+                  }
+                  & .sand{
+                    scale: 0.95;
+                  }
+                  &::before{
+                      content: '';
+                      position: absolute;
+                      background-color: #e8e8e8;
+                      width: 100%;
+                      height: 100px;
+                      top: 150%;
+                      left: 50px;
+                      border-radius: 50%;
+                      filter: blur(50px);
+                  }
+              }
+              
+              & .content{
+                  position: absolute;
+                  z-index: 20;
+                  width: 100%;
+                  height: 100%;
+                  right: var(--w-column);
+                  display: flex;
+                  flex-direction: column;
+                  justify-content: center;
+                  align-items: end;
+                  gap: 20px;
+                  & .text{
+                      font-weight: 500;
+                      font-family: 'Noto Sans KR';
+                      text-shadow: -1px 0px #fff, 0px 1px #fff, 1px 0px #fff, 0px -1px #fff;
+                      font-size: 18PX;
+                  }
+                  & h2{
+                      font-family: 'Bebas Neue';
+                      font-size: 10.5em;
+                      line-height: 1em;
+                      text-shadow: -1px 0px #fff, 0px 1px #fff, 1px 0px #fff, 0px -1px #fff;
+                  }
+                  & .description{
+                      align-items: center;
+                      color: #000;
+                      font-family: "Abel";
+                      max-width: 400px;
+                      font-weight: 400;
+                      font-size: small;
+                      text-align: right;
+                  }
+              }
+
+              & .more{
+                  display: grid;
+                  grid-template-columns: repeat(2, 140px);
+                  /* gap: 20px; */
+                  grid-template-rows: 35px;
+                  position: relative;
+                  left: 130px;
+                  & button{
+                      /* border-radius: 30px; */
+                      font-family: "Abel";
+                      text-transform: uppercase;
+                      background-color: transparent;
+                      border: none;
+                      position: relative;
+                      background-color: #000;
+                  }
+                  
+                  & a{
+                    color: #fff;
+                  }
+
+                  :hover{
+                    scale: 1.03;
+                  }
+              }
+          }
+      }
+
+  & .arrows{
+      width: min(1700px, 90vw);
+      display: flex;
+      justify-content: space-between;
+      position: absolute;
+      top: 52%;
+      left: 50%;
+      transform: translate(-50%, -25px);
+      pointer-events: none;
+      z-index: 100;
+      & button{
+          top: 60%;
+          width: 50px;
+          height: 50px;
+          border-radius: 50%;
+          border: 2px solid #000000;
+          background-color: transparent;
+          font-size: large;
+          cursor: pointer;
+          pointer-events: auto;
+          transition: 0.5s;
+          &:hover{
+            background-color: #000;
+          }
+          &:hover span{
+            color: #fff;
+          }
+          & span{
+            color: #000;
+            position: relative;
+            left: 4px;
+            top: 3px;
+          }
+      }
+  }
+
+  & .indicators{
+      position: absolute;
+      top: 62%;
+      height: var(--w-column);
+      width: min(1200px, 90vw);
+      left: 46%;
+      transform: translateX(-50%);
+      display: flex;
+      flex-direction: column;
+      pointer-events: none;
+      justify-content: end;
+      gap: 10px;
+      & .number{
+          font-family: 'Poltawski Nowy';
+          font-size: 6vw;
+          color: #000;
+      }
+
+      & ul{
+          display: flex;
+          gap: 10px;
+          & li{
+              width: 50px;
+              height: 5px;
+              background-color: #000000;
+              border-radius: 10px;
+              pointer-events: auto;
+              cursor: pointer;
+              transition: 0.5s;
+              &.active{
+                  background-color: #ff2600;
+              }
+          }
+          }
+      }
+  }
+
+
+/* animation */
+
+body{
+  .carousel{
+      --calculation: 1; /* 1 or -1 */
+      & .list{
+          & .item{
+              transform: translateX(calc(100vw * var(--calculation)));
+              transition:  0.5s;
+              opacity: 0;
+              & figure{ 
+                  & img{
+                      transform: rotate(0deg);
+                      transition: transform 0.5s;
+                      transition-delay: 0.3s;
+                      
+                  }
+              }
+
+              & .content{
+                  & .text, h2, .description, .more{
+                      transform: translateX(calc(200px * var(--calculation)));
+                      transition:  0.7s;
+                      opacity: 0;
+                      transition-delay: 0.3s;
+                  }
+                  & h2{ transition-delay: 0.5s; }
+                  & .description{ transition-delay: 0.7s; }
+                  & .more{ transition-delay: 0.9s; }
+              }
+
+              &.active{
+                  opacity: 1;
+                  transform: translateX(0);
+                  & figure{
+                      & img{
+                          transform: rotate(-20deg);
+                      }
+                  }
+                  & .content{
+                      & .text, h2, .description, .more{
+                          transform: translateX(0px);
+                          opacity: 1;
+                      }
+                  }
+              }
+              
+              &.activeOld{
+                  transform: translateX(calc(-100vw * var(--calculation)));
+              }
+          }
+      }
+  }
+}
+
+/* 메인 비주얼 영역 - 반응형 */
+
+
+
+@media screen and (max-width: 1024px) and (min-width: 768px){
+    :root{
+        --w-column: 100px;
+    }
+    body{
+      & .carousel{
+            height: 60vh;
+            & .list{
+                & .item{
+                    & .content{
+                        & h2{
+                            font-size: 5em;
+                        }
+                    }
+                }
+            }
+            & .arrows{
+              display: none;
+            }
+        }
+    }
+  }
+  
+  @media screen and (max-width: 767px){
+    :root{
+        --w-column: 50px;
+    }
+    body{
+        & .carousel{
+            height: 100vh;
+            & .list{
+                & .item{
+                    & .content{
+                        justify-content: end;
+                        padding-bottom: 100px;
+                        & h2{
+                            font-size: 5em;
+                        }
+                    }
+                    & figure{
+                        width: 110%;
+                        transform: translateY(0);
+                        top: 200px;
+                        left: -30px;
+                    }
+                }
+            }
+            & .indicators{
+              display: none;
+            }
+            & .arrows{
+              display: none;
+            }
+  
+            .salad{
+              position: relative;
+              bottom: 80px;
+              scale: 1.2;
+            }
+        }
+    }
+  }
+
+
+
+
+/* ------------------------메뉴 슬라이드 영역------------------------ */
+
+.menu{
+    text-align: left;
+    margin-bottom: 150px !important; 
+  }
+
+  .menu-title{
+    font-size: 10.2rem;
+    font-family: "Bebas Neue";
+    line-height: 80%;
+    position: relative;
+    left: 90px;
+  }
+
+  .menu-title .all-menu{
+    position: relative;
+    left: 0;
+    transition: all 0.5s ease;
+  }
+
+  .menu-title .all-menu:hover{
+    color: #ff2600;
+  }
+
+  .menu-title .all-menu .arrow{
+    position: relative;
+    font-size: 10.6rem;
+    font-weight: bold;
+    top: 15px;
+    transition: all 0.2s;
+  }
+
+  .menu-title .all-menu:hover .arrow{
+    transform: translate(15px, -10px);
+  }
+
+
+  .swiper-container {
+    width: 100%;
+    height: 420px;
+    border-bottom: 1px solid #000;
+    border-top: 1px solid #000;
+    margin-top: 30px;
+    margin-bottom: 0;
+  }
+  
+  .swiper-slide {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    border-right: 1px solid #000;
+    text-align: center;
+    position: relative;
+  }
+
+  .swiper-slide h3{
+    position: relative;
+    left: -14px;
+  }
+  
+  .swiper-slide img {
+    max-width: 100%; /* 이미지가 슬라이드의 너비를 넘지 않도록 설정 */
+    height: auto; /* 이미지 비율 유지, 높이 자동 조정 */
+    object-fit: cover; 
+    scale: 0.9;
+    transition: all 0.5s ;
+    position: relative;
+    left: -14px;
+  }
+
+
+  .swiper-slide img:hover{
+    scale: 0.95;
+  }
+  
+  .swiper-button-next,
+  .swiper-button-prev {
+    display: none; 
+  }
+  
+  .swiper-pagination-bullet {
+    display: none; 
+  }
+
+
+  
+  /* 메뉴 슬라이드 영역 - 반응형 */
+
+
+  @media screen and (max-width: 1024px) {
+
+    .menu-title{
+      font-size: 9.6rem;
+      position: relative;
+      left: 0;
+    }
+    
+  }
+
+
+  
+  @media screen and (max-width: 768px){
+
+    .menu-title{
+      font-size: 8.2rem;
+    }
+
+    
+    
+  }
+
+
+/* ------------------------브랜드 영역------------------------ */
+
+
+
+
+.brand {
+    width: 90%;
+    margin: 0 auto;
+    padding-bottom: 150px;
+}
+
+.brand-section {
+    text-align: center;
+}
+
+
+.brand-title {
+    font-size: 10.2rem;
+    font-family: "Bebas Neue";
+    line-height: 80%;
+    margin-bottom: 30px;
+}
+
+
+.brand-txt{
+    text-align: left;
+    font-family: "Noto Sans KR";
+    position: absolute; /* 절대 위치 지정 */
+    top: 35%; /* 이미지의 중간쯤에 위치 */
+    left: 57%; /* 이미지의 오른쪽으로 배치 */
+    width: 35%; /* 텍스트 박스 너비 */
+    z-index: 2; /* 이미지 위에 텍스트가 표시되도록 설정 */
+    font-size: 18px;
+}
+
+.brand-txt span{
+    font-weight: 700;
+    font-size: 3.2rem;
+}
+
+.brand-txt p{
+    margin-top: 20px;
+}
+
+.image-container {
+    position: relative;
+    width: 100%;
+    height: 800px; /* 높이 지정 이미지들 겹칠 공간 확보, 변경 예정 */
+    overflow: visible;
+}
+
+.brand-item {
+    position: absolute;
+    background-color: #fff;
+    box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+    overflow: hidden;
+    transition: transform 0.3s ease;
+}
+
+.brand-item img {
+    width: 100%;
+    height: auto;
+    display: block;
+    margin: 0; /* 불필요한 여백 제거 */
+}
+
+
+.b-sub-text{
+  width: 100%;
+  height: 100%;
+  top: 0;
+  left: 0;
+  position: absolute;
+  background: rgba(0,0,0,0.6);
+  justify-content: center;
+  align-items: center;
+  display: flex;
+  flex-direction: column;
+  opacity: 0;
+  transition: 0.6s;
+  color: #fff;
+}
+
+.b-sub-text:hover{
+  opacity: 1;
+}
+
+.b-sub-text h1{
+  font-family: "Bebas Neue";
+  font-size: 55px;
+}
+
+
+
+.b-more{
+    display: grid;
+    grid-template-columns: repeat(2, 140px);
+    gap: 20px;
+    grid-template-rows: 35px;
+    position: relative;
+    margin-top: 40px;
+    & button{
+        font-family: "Abel";
+        text-transform: uppercase;
+        background-color: transparent;
+        border: none;
+        background-color: #000;
+    }
+    & a{
+        color: #fff;
+      }
+
+      :hover{
+        scale: 1.03;
+      }
+  }
+
+
+/* 겹치는 이미지들 위치 설정 */
+
+.img1 {
+    top: 0;
+    left: 20%;
+    width: 584px;
+    height: 723px;
+    z-index: 1;
+}
+
+
+.img2 {
+    top: 420px;
+    left: 56%;
+    width: 623px;
+    height: 414px;
+    z-index: 2;
+}
+
+
+.img3 {
+    top: 750px;
+    left: 40%;
+    width: 742px;
+    height: 414px;
+    z-index: 3;
+}
+
+.brand-item:hover {
+    transform: translateY(-10px);
+}
+
+
+
+
+
+/* 브랜드 영역 - 반응형 */
+
+
+@media screen and (max-width: 1024px) {
+
+  
+  
+  
+}
+
+
+
+@media screen and (max-width: 768px){
+
+  .brand-txt{
+    display: none;
+  }
+
+  
+}
+
+
+/* ------------------------미디어 영역------------------------ */
+
+
+.gym-section {
+    background-image: url(../img/media-bg.png); /* 배경 이미지 교체 */
+    background-size: cover;
+    background-position: center;
+    padding: 100px 0;
+    position: relative;
+    top: 380px;
+}
+
+.gym-header {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    color: white;
+}
+
+.gym-header h1 {
+    font-size: 10.3rem;
+    font-weight: bold;
+    font-family: "Bebas Neue";
+    color: #fff;
+    text-transform: uppercase;
+    line-height: 80%;
+}
+
+.video-container {
+    display: flex;
+    justify-content: center;
+    margin-top: 50px;
+    opacity: 0; /* 기본적으로 보이지 않게 설정, AOS로 나타남 */
+    position: relative;
+}
+
+iframe {
+    width: 80%;
+    max-width: 1240px;
+    height: 700px;
+    border: none;
+    border-radius: 5px;
+}
+
+
+
+/* ------------------------쇼핑 영역------------------------ */
+
+
+.shop-title{
+  font-size: 10.2rem;
+  font-family: "Bebas Neue";
+  line-height: 85%;
+  margin-bottom: 60px;
+  margin-top: -30px;
+  position: relative;
+  left: 90px;
+}
+
+.shop-title .shop{
+  position: relative;
+  left: 0;
+  transition: all 0.5s ease;
+}
+
+.shop-title .shop:hover{
+  color: #ff2600;
+}
+
+.shop-title .shop .arrow{
+  position: relative;
+  font-size: 10.6rem;
+  font-weight: bold;
+  top: 15px;
+  transition: all 0.2s;
+}
+
+.shop-title .shop:hover .arrow{
+  transform: translate(15px, -10px);
+}
+
+  .shopping img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+  }
+  
+  .shopping {
+    width: 100%;
+    height: 100%;
+  }
+  
+  .menu {
+    width: 100%;
+    margin: 17.5em 0;
+  }
+  
+  .menu-item {
+    width: 100%;
+    padding: 0 2em;
+    display: flex;
+    cursor: pointer;
+  }
+
+  
+  .menu-item .name p {
+    position: absolute;
+    top: 0%;
+    width: 100%;
+    font-family: "Roboto";
+    font-weight: 400;
+    text-transform: uppercase;
+    line-height: 100%;
+    letter-spacing: -0.025em;
+    transition: color 0.25s;
+    border-top: 1.3px solid #000;
+    margin: 10px 0;
+  }
+
+  
+  
+  .name {
+    position: relative;
+    overflow: hidden;
+  }
+  
+  .name {
+    flex: 4;
+    height: 73px;
+    font-size: 70px;
+    text-align: center;
+  }
+  
+  
+  .name p:nth-child(2){
+    top: 100%;
+    color: #000;
+  }
+  
+  
+  .menu:hover .name p:nth-child(1) {
+    color: rgb(165, 165, 165);
+  }
+  
+  .preview {
+    position: relative;
+    top: 0;
+    left: 0;
+    width: 225px;
+    height: 275px;
+    z-index: 2;
+    pointer-events: none;
+  }
+  
+  .preview-img {
+    position: absolute;
+    width: 100%;
+    height: 100%;
+  }
+  
+  .preview-img-2 {
+    top: 20px;
+    left: 20px;
+  }
+  
+  .preview-img img {
+    position: absolute;
+    top: 0;
+    left: 0;
+  }
+
+
+/* ------------------------컨택 영역------------------------ */
+
+
+ .contact{
+    width: 100%;
+    height: 100vh;
+    background-image: url(../img/muscle-f\(1\).jpg);
+    color: #fff;
+    font-family: "Roboto";
+  }
+  
+  .top-nav {
+    width: 100%;
+    border-bottom: 1px solid #fff;
+    font-size: 12px;
+    text-align: center;
+    padding: 1em;
+    font-weight: 300;
+  }
+  
+  .nav {
+    width: 100%;
+    height: 60px;
+    padding: 0 2em;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    border-bottom: 1px solid #fff;
+  }
+  
+  .nav .site-name {
+    font-family: "Abel";
+    font-weight: 800;
+    font-size: 16px;
+  }
+  
+  .branding {
+    display: flex;
+    align-items: center;
+    font-size: 14px;
+    font-weight: 300;
+  }
+  
+  .menu-icon {
+    font-size: 14px;
+    text-transform: uppercase;
+    font-weight: 300;
+  }
+  
+  .menu-icon ion-icon {
+    position: relative;
+    top: 2px;
+  }
+  
+  .marquee {
+    width: 1000%;
+    margin: 0 auto;
+    white-space: nowrap;
+    overflow: hidden;
+    padding-top: 1.2em;
+  }
+  
+  .marquee span {
+    font-family: "Bebas Neue";
+    font-weight: 700;
+    color: #ff2600;
+    font-size: 8em;
+    text-transform: uppercase;
+    display: inline-block;
+    padding-left: -10%;
+    animation: marquee-animation 80s linear infinite;
+  }
+  
+  @keyframes marquee-animation {
+    0% {
+      transform: translate(0, 0);
+    }
+    100% {
+      transform: translate(-100%, 0);
+    }
+  }
+  
+  .col {
+    width: 50%;
+    padding: 1em 3em;
+  }
+  
+  .contact-section h3 {
+    text-transform: uppercase;
+    color: #747474;
+    font-weight: 400;
+    font-size: 20px;
+    margin-bottom: 10px;
+  }
+  
+  .contact-section span {
+    text-transform: uppercase;
+  }
+  
+  .contact-details p {
+    font-size: 40px;
+    line-height: 60px;
+    padding-top: 0.8em;
+  }
+  
+  .item {
+    padding: 4em 0 0 0;
+  }
+  
+  .contact-info {
+    display: flex;
+  }
+  
+  .address {
+    padding-left: 4em;
+  }
+  
+  input {
+    background: none;
+    outline: none;
+    border: none;
+    border-bottom: 1px solid #747474;
+    font-size: 24px;
+    padding: 0.4em;
+    width: 100%;
+    color: #fff;
+    margin-right: 0.4em;
+  }
+  
+  .row {
+    display: flex;
+    margin: 2em 0 !important;
+  }
+  
+  textarea#message {
+    width: 100%;
+    background: none;
+    outline: none;
+    border: none;
+    border-bottom: 1px solid #747474;
+    font-size: 24px;
+    padding: 0.4em;
+    width: 100%;
+    color: #fff;
+    font-family: "League Gothi";
+  }
+  
+  .submit {
+    width: 100%;
+    justify-content: space-between;
+  }
+  
+  .submit a {
+    text-decoration: none;
+    color: #fff;
+    font-family: "League Gothi";
+    font-size: 60px;
+    font-weight: 600;
+    text-transform: uppercase;
+  }
+  
+  .send-icon {
+    font-size: 60px;
+  }
+  
+  @media (min-width: 900px) {
+   .contact {
+      height: 100%;
+    }
+  
+    .contact-section {
+      width: 100%;
+      display: flex;
+    }
+
+  }
+  
+  @media (max-width: 900px) {
+    .col {
+      width: 100%;
+    }
+  }
+
+
+  

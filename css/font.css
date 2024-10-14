@@ -1,0 +1,22 @@
+@charset "utf-8";
+
+/* 영문폰트 Poltawski Nowy */
+
+@import url('https://fonts.googleapis.com/css2?family=Poltawski+Nowy:ital,wght@0,400..700;1,400..700&display=swap');
+
+/* 영문폰트 Abel */
+
+@import url('https://fonts.googleapis.com/css2?family=Abel&display=swap');
+
+/* 영문폰트 bebas */
+@import url('https://fonts.googleapis.com/css2?family=Bebas+Neue&display=swap');
+
+/* 영문폰트 League Gothic */
+@import url('https://fonts.googleapis.com/css2?family=League+Gothic&display=swap');
+
+/* 영문폰트 Roboto */
+@import url('https://fonts.googleapis.com/css2?family=Roboto:ital,wght@0,100;0,300;0,400;0,500;0,700;0,900;1,100;1,300;1,400;1,500;1,700;1,900&display=swap');
+
+
+/* 한글폰트 Noto Sans KR */
+@import url('https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@100..900&display=swap');

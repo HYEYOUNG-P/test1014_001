@@ -1,0 +1,356 @@
+@charset "utf-8";
+
+/*
+CSS에 대한 설명 - common.css > 공통요소, 사이트맵, 헤더
+최초작성일 : 2024.09.23
+최초작성자 : 박혜영
+
+수정일자 :
+수정파일 작성자 :
+수정 사유:
+ */
+
+
+body{
+    font-family: "Noto Sans" sans-serif;
+    font-size: 1.6rem;
+    line-height: 1.35;
+    overflow-x: hidden;
+    color: #000;
+
+}
+
+body.hidden-scrolling{
+	  overflow-y: hidden;
+}
+
+#wrap{
+	  min-width: 320px;
+	  position: relative;
+	  background-color: #f6f6f6
+   }
+  
+  .inner{
+	  max-width: 1700px;
+	  padding: 0 5%;
+	  margin: 0 auto;
+  }
+
+
+/* 사이트맵 - all-wrap */
+
+.all-wrap{
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background-color: #000;
+  z-index: 9999;
+}
+
+.all-wrap h2{
+  font-family: "Bebas Neue";
+  font-size: 10rem;
+  text-transform: uppercase;
+  text-align: center;
+  color: #fff;
+  padding: 150px 0 50px;
+}
+
+.all-wrap .all-gnb{
+  width: 1200px;
+  margin: 0 auto;
+  display: flex;
+}
+
+.all-wrap .all-gnb a:first-child{
+  font-family: "Roboto";
+}
+
+.all-wrap .all-gnb > li{
+  width: 25%;
+  text-align: center;
+}
+
+.all-wrap .all-gnb > li > a{
+  display: block;
+  padding: 30px 0;
+  font-size: 3rem;
+  color: #fff;
+}
+
+.all-wrap .all-depth2{
+  border-top: 1px solid rgba(255,255,255,0.2);
+  padding-top: 20px;
+  margin: 0 30px;
+}
+
+.all-wrap .all-depth2 li a{
+  display: block;
+  padding: 3px 0;
+  color: rgba(255,255,255,0.3);
+  transition: color 0.5s;
+}
+
+.all-wrap .all-depth2 li:hover a{
+  color: #ff2600;
+}
+
+.all-wrap .all-close{
+  cursor: pointer;
+  position: absolute;
+  top: 0;
+  right: 0;
+}
+
+
+
+/*header*/
+header .inner{
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-end;
+  max-width: 100%;
+}
+
+header{
+  border-bottom: 1px solid #000;
+}
+
+header h1{
+  padding: 20px 0 15px;
+}
+
+header .gnb{
+  display: flex;
+}
+
+header .gnb > li{
+  position: relative;
+}
+
+header .gnb > li::before{
+  content: "";
+  display: block;
+  width: 8px;
+  height: 8px; 
+  background-color: #ff2600;
+  border-radius: 50%;
+  position: absolute;
+  left: 50%;
+  top: -10px;
+  transform: translateX(-50%);
+  opacity: 0;
+  transition: opacity 0.5s, top 0.2s;
+}
+
+header .gnb > li:hover:before{
+  opacity: 1;
+  top: 0;
+}
+
+header .gnb > li > a{
+  display: block;
+  padding: 10px 40px 20px;
+  font-size: 2rem;
+  font-family: "Roboto";
+  font-weight: 500;
+}
+
+header .gnb > li:hover > a{
+  color: #ff2600;
+}
+
+header .gnb .depth2{
+  position: absolute;
+  top: 80px;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 500px;
+  z-index: 99;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+}
+
+header .gnb .depth2 li a{
+  display: block;
+  text-align: center;
+  padding: 10px;
+  color: #000;
+  transition: color 0.5s;
+}
+
+header .gnb .depth2 li:hover a{
+  color: #ff2600;
+}
+
+header .depth2-bg{
+  width: 100%;
+  height: 320px;
+  background-color: #fff;
+  position: absolute;
+  top: 78px;
+  left: 0;
+  z-index: 98;
+  border-top: 1px solid #dddd;
+  box-shadow: 0 5px 10px rgba(0, 0, 0, 0.04);
+}
+
+header .mgnb-wrap{
+  position: fixed;
+  top: 0;
+  left: 100%;
+  width: 100%;
+  height: 100%;
+  z-index: 9999;
+  padding: 70px 5% 0;
+  background-color: #fff;
+}
+
+header .mgnb-wrap .mgnb{
+  border-top: 1px solid #000;
+}
+
+header .mgnb-wrap .mgnb > li{
+  padding: 15px 0 10px;
+  border-bottom: 1px solid #ddd;
+  font-size: 2rem;
+}
+
+.mdepth2{
+  padding: 10px 0 0 30px;
+}
+
+.mdepth2 > li{
+  position: relative;
+}
+
+.mdepth2 > li::before{
+  content: "";
+  display: block;
+  width: 5px;
+  height: 5px;
+  background-color: #999;
+  border-radius: 50%;
+  position: absolute; top: 50%;
+  left: -15px;
+  transform: translateY(-50%);
+}
+
+.mdepth2 > li a{
+  color: #666;
+  font-size: 1.4rem;
+  display: block;
+  padding: 3px 0;
+}
+
+.mgnb-close{
+  position: absolute;
+  top: 20px;
+  right: 5%;
+  cursor: pointer;
+}
+
+
+header .utill{
+  display: flex;
+  align-items: center;
+  gap: 20px;
+  padding-bottom: 20px;
+}
+
+header .utill > li{
+  cursor: pointer;
+}
+
+header .utill > li img{
+  width: 20px;
+}
+
+header .utill .ham{
+  display: none;
+}
+
+
+
+/*search*/
+
+
+.search{
+  position: absolute;
+  left: 0;
+  top: 78px;
+  width: 100%;
+  background-color: #fff;
+  border-top: 1px solid #ddd;
+  text-align: center;
+  padding: 80px 0 50px;
+  z-index: 1000;
+}
+
+.search div{
+  display: inline-block;
+  border-radius: 50px;
+  background-color: #eee;
+  overflow: hidden;
+  width: 30%;
+  min-width: 260px;
+}
+
+.search input[type="text"]{
+  font-family: "Arita-dotum", sans-serif;
+  background-color: transparent;
+  width: calc(100% - 60px);
+  height: 50px;
+  font-size: 1.6rem;
+  padding: 0 20px;
+}
+
+.search button{
+  background: url(../img/search.png) no-repeat center;
+  font-size: 0;
+  color: transparent;
+  width: 50px;
+  height: 50px;
+  cursor: pointer;
+  border: 0;
+}
+
+.search .search-close{
+  display: inline-block;
+  width: 40px;
+  height: 40px;
+  border-radius: 50%;
+  background-color: #000;
+  color: #fff;
+  padding-top: 8px;
+  transform: translateY(70px);
+  text-align: center;
+  cursor: pointer;
+}
+
+
+
+/* 태블릿 */
+
+
+@media screen and (max-width : 1024px){
+  header h1{padding: 15px 0 10px;}
+  header h1 img{width: 200px;}
+  header .gnb{display: none;}
+  header .utill{padding-bottom: 22px;}
+  header .utill .sitemap{display: none;}
+  header .utill .ham{display: block;}
+}
+
+
+/* 모바일 */
+@media screen and (max-width : 768px){
+
+  header .utill li:last-child{display: none;}
+}
+
+
